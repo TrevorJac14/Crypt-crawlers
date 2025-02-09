@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_5bc3p"]
-[ext_resource type="Script" path="res://Scenes/gamemanager.gd" id="1_uitxc"]
+[ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_uitxc"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_0plmi"]
 [ext_resource type="Texture2D" uid="uid://d0asgphegkwa" path="res://brackeys_platformer_assets/sprites/world_tileset.png" id="2_muctk"]
 [ext_resource type="PackedScene" uid="uid://b4dktglfto65v" path="res://Scenes/platform.tscn" id="3_q3pcx"]
