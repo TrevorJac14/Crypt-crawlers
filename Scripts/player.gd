@@ -3,11 +3,8 @@ extends CharacterBody2D
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var health = 20
-var mana = 50
+
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var timer = $Timer
-@onready var animation_player = $AnimationPlayer
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -42,20 +39,3 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	if Input.is_action_pressed("attack"):
-		animation_player.play("attack")
-func take_damage(amount: int) -> void:
-	animated_sprite.play("hurt")
-	health -= amount
-	print("Player health:", health)
-	if health <= 0:
-		death()
-func death():
-	print("You Died")
-	Engine.time_scale = 0.5
-	animated_sprite.play("death")
-	get_node("CollisionShape2D").queue_free()
-	timer.start()
-func _on_timer_timeout():
-	Engine.time_scale = 1
-	get_tree().reload_current_scene()
