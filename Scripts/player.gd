@@ -47,9 +47,9 @@ func take_damage(amount: int) -> void:
 func die() -> void:
 	print("You died")
 	Engine.time_scale = 0.5
-	get_node("CollisionShape2D").queue_free()
+	animated_sprite.play("death")
+	#get_node("CollisionShape2D").queue_free()
 	timer.start()
-
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()
