@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnaf2pa2aa6m"]
+[gd_scene load_steps=11 format=3 uid="uid://bnaf2pa2aa6m"]
 
 [ext_resource type="Script" path="res://Scripts/slime.gd" id="1_cnd0y"]
 [ext_resource type="Texture2D" uid="uid://dk6ilt3v5c5r4" path="res://brackeys_platformer_assets/sprites/slime_green.png" id="1_wvvd3"]
 [ext_resource type="PackedScene" uid="uid://bftw8kox3gc23" path="res://Scenes/killzone.tscn" id="2_p3a76"]
+[ext_resource type="PackedScene" uid="uid://dd8c6js5jihdt" path="res://Scenes/hurtzone.tscn" id="4_hvavc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0n3p7"]
 atlas = ExtResource("1_wvvd3")
@@ -54,10 +55,6 @@ frame_progress = 0.863472
 
 [node name="Killzone" parent="." instance=ExtResource("2_p3a76")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_0mit2")
-
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, 3)
 target_position = Vector2(13, 0)
@@ -65,3 +62,10 @@ target_position = Vector2(13, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 3)
 target_position = Vector2(-13, 0)
+
+[node name="hurtzone" parent="." instance=ExtResource("4_hvavc")]
+position = Vector2(-16, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtzone"]
+position = Vector2(16, 7)
+shape = SubResource("RectangleShape2D_0mit2")

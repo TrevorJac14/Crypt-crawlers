@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd8c6js5jihdt"]
+
+[ext_resource type="Script" path="res://Scripts/hurtzone.gd" id="1_rjcy3"]
+
+[node name="hurtzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_rjcy3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
