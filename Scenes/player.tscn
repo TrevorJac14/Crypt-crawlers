@@ -1,7 +1,21 @@
-[gd_scene load_steps=30 format=3 uid="uid://bwi3gr4idletr"]
+[gd_scene load_steps=36 format=3 uid="uid://bwi3gr4idletr"]
 
 [ext_resource type="Texture2D" uid="uid://cjw64gcw2aqpk" path="res://brackeys_platformer_assets/sprites/knight.png" id="1_djlf7"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hemfh"]
+[ext_resource type="Texture2D" uid="uid://ctxw4smsffxvl" path="res://brackeys_platformer_assets/sprites/knight2.png" id="2_qdts1"]
+[ext_resource type="AudioStream" uid="uid://bfdhx4jfk7b2j" path="res://brackeys_platformer_assets/sounds/hurt.wav" id="4_reuyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1p60"]
+atlas = ExtResource("2_qdts1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74opt"]
+atlas = ExtResource("2_qdts1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4a3p"]
+atlas = ExtResource("2_qdts1")
+region = Rect2(224, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pbhow"]
 atlas = ExtResource("1_djlf7")
@@ -107,6 +121,20 @@ region = Rect2(224, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_l1p60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74opt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4a3p")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_pbhow")
 }, {
 "duration": 1.0,
@@ -118,9 +146,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pgo3f")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -145,7 +173,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -204,6 +232,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_abx4k"]
 radius = 5.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ad03d"]
+size = Vector2(617.356, 343.082)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 2
@@ -212,12 +243,31 @@ script = ExtResource("1_hemfh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_20sjc")
-animation = &"death"
+animation = &"attack"
+frame = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Player collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_abx4k")
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Melee hitbox" type="Area2D" parent="." groups=["sword"]]
+position = Vector2(10, -4)
+rotation = 3.14159
+scale = Vector2(0.0190465, -0.0204033)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MeleeShape" type="CollisionShape2D" parent="Melee hitbox"]
+unique_name_in_owner = true
+position = Vector2(-6.34039, -24.5058)
+shape = SubResource("RectangleShape2D_ad03d")
+disabled = true
+debug_color = Color(0.793637, 0.174224, 0.939767, 0.42)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_reuyb")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

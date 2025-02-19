@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_5bc3p"]
 [ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_uitxc"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b4dktglfto65v" path="res://Scenes/platform.tscn" id="3_q3pcx"]
 [ext_resource type="PackedScene" uid="uid://dj8x2xdkvpc5m" path="res://Scenes/coin.tscn" id="4_q5nsl"]
 [ext_resource type="PackedScene" uid="uid://bftw8kox3gc23" path="res://Scenes/killzone.tscn" id="5_rtyfo"]
-[ext_resource type="PackedScene" uid="uid://bnaf2pa2aa6m" path="res://Scenes/slime.tscn" id="6_pp1o2"]
+[ext_resource type="PackedScene" path="res://Scenes/slime.tscn" id="6_pp1o2"]
 [ext_resource type="FontFile" uid="uid://5kxxqvv4dvuc" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="9_iqgfo"]
+[ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="10_0a6oy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b4pok"]
 texture = ExtResource("2_muctk")
@@ -174,6 +175,7 @@ texture = ExtResource("2_muctk")
 
 [sub_resource type="TileSet" id="TileSet_b1xr3"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_b4pok")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w6sb1"]
@@ -271,9 +273,6 @@ position = Vector2(121, 140)
 [node name="Coin4" parent="Coins" instance=ExtResource("4_q5nsl")]
 position = Vector2(313, -8)
 
-[node name="Slime" parent="." instance=ExtResource("6_pp1o2")]
-position = Vector2(505, 116)
-
 [node name="Labels" type="Node" parent="."]
 
 [node name="Label" type="Label" parent="Labels"]
@@ -297,3 +296,12 @@ libraries = {
 autoplay = "move"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Pslime" parent="." instance=ExtResource("10_0a6oy")]
+position = Vector2(121, -13)
+
+[node name="Pslime2" parent="." instance=ExtResource("10_0a6oy")]
+position = Vector2(359, -12)
+
+[node name="Slime" parent="." instance=ExtResource("6_pp1o2")]
+position = Vector2(509, 115)
