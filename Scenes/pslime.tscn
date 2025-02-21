@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1tduwp567wof"]
+[gd_scene load_steps=15 format=3 uid="uid://c1tduwp567wof"]
 
 [ext_resource type="Script" path="res://Scripts/pslime.gd" id="1_1qu43"]
 [ext_resource type="Texture2D" uid="uid://jqw03mec5770" path="res://brackeys_platformer_assets/sprites/slime_purple.png" id="2_gpyiu"]
+[ext_resource type="PackedScene" uid="uid://dd8c6js5jihdt" path="res://Scenes/hurtzone.tscn" id="3_8idhb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7rh4"]
 atlas = ExtResource("2_gpyiu")
@@ -75,6 +76,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ednja"]
 size = Vector2(14, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbo3q"]
+size = Vector2(13.75, 15.5)
+
 [node name="Pslime" type="Area2D"]
 collision_layer = 5
 collision_mask = 5
@@ -88,6 +92,13 @@ animation = &"hurt"
 position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_ednja")
 debug_color = Color(0.611765, 0.537255, 0, 0.717647)
+
+[node name="hurtzone" parent="." instance=ExtResource("3_8idhb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtzone"]
+position = Vector2(0.125, 4)
+shape = SubResource("RectangleShape2D_xbo3q")
+debug_color = Color(0.107973, 0.613518, 0.586731, 0.42)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

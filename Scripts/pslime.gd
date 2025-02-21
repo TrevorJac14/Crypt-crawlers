@@ -2,6 +2,7 @@ extends Area2D
 
 var hit = false
 var health = 10
+
 func _ready():
 	pass
 
@@ -14,8 +15,6 @@ func _on_area_entered(area) -> void:
 		hit = true
 		$AnimatedSprite2D.play("hurt")
 		health -= 5
-		if health <= 0:
-			death()
 
 func death():
 	queue_free()
@@ -24,3 +23,5 @@ func death():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if $AnimatedSprite2D.animation == "hurt":
 		hit = false
+		if health <= 0:
+			death()

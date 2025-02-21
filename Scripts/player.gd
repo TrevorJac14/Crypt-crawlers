@@ -6,6 +6,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health = 20
 var is_dead = false
 var is_attacking = false
+var strength = 5
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var melee_hitbox = $"Melee hitbox"
@@ -45,6 +46,7 @@ func _physics_process(delta: float) -> void:
 		is_attacking = true
 		%MeleeShape.disabled = false
 		animated_sprite.play("attack")
+	# Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
 	health -= amount
 	print("Player health:", health)
