@@ -3,6 +3,7 @@ extends CharacterBody2D
 var SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+const GRAVITY = 2000.0
 var health = 20
 var is_dead = false
 var is_attacking = false
@@ -16,15 +17,15 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor() && is_dead == false:
 		velocity.y = JUMP_VELOCITY
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
 	#flip the sprite
-	if direction > 0:
+	if direction > 0 && is_dead == false:
 		animated_sprite.flip_h = false
 		melee_hitbox.position.x = 10
-	elif direction < 0:
+	elif direction < 0 && is_dead == false:
 		animated_sprite.flip_h = true
 		melee_hitbox.position.x = -10
 	#play animations
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("run")
 	elif is_dead == false && is_attacking == false:
 		animated_sprite.play("jump")
-	if direction:
+	if direction && is_dead == false:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
