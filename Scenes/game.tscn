@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_5bc3p"]
 [ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_uitxc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="6_pp1o2"]
 [ext_resource type="FontFile" uid="uid://5kxxqvv4dvuc" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="9_iqgfo"]
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="10_0a6oy"]
+[ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="11_rrv4q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b4pok"]
 texture = ExtResource("2_muctk")
@@ -394,3 +395,6 @@ position = Vector2(282, 2)
 
 [node name="Slime" parent="." instance=ExtResource("6_pp1o2")]
 position = Vector2(204, 67)
+
+[node name="Skeleton" parent="." instance=ExtResource("11_rrv4q")]
+position = Vector2(713, -17)

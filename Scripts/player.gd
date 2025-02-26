@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+
+var throw_scene = load("res://Scenes/player_throw.tscn")
+var throw_direction
 var SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -8,6 +11,7 @@ var health = 20
 var is_dead = false
 var is_attacking = false
 var strength = 5
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var melee_hitbox = $"Melee hitbox"
@@ -47,7 +51,31 @@ func _physics_process(delta: float) -> void:
 		is_attacking = true
 		%MeleeShape.disabled = false
 		animated_sprite.play("attack")
-	# Handles Subweapon Attacking
+		
+	if velocity.x < 0:
+		throw_direction = -1
+	elif velocity.x > 0:
+		throw_direction = 1
+	else:
+		throw_direction = throw_direction
+
+	if Input.is_action_just_pressed("throw"):
+		throw()
+
+func throw():
+	var thrown_object = throw_scene.instantiate()
+	var face_direction = Vector2.RIGHT
+	get_parent().add_child(thrown_object)
+	
+	thrown_object.global_position = global_position
+	if throw_direction == 1:
+		face_direction = Vector2.RIGHT
+	elif throw_direction == -1:
+		face_direction = Vector2.LEFT
+	#var facing_direction = Vector2.RIGHT if throw_rection == 1  elif Vector2.LEFT
+	thrown_object.direction = face_direction#global_position.direction_to(global_position + transform.x)
+
+# Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
 	health -= amount
 	print("Player health:", health)
