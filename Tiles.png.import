@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwbqbjv78rnvm"
-path="res://.godot/imported/NES - Castlevania 3 Draculas Curse - Trevor Belmont.png-84320f93d5ca2d6a0a16940a30425ed3.ctex"
+uid="uid://t552cyb741ih"
+path="res://.godot/imported/Tiles.png-825b95a5145508fffe81ba0fc1c92c0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NES - Castlevania 3 Draculas Curse - Trevor Belmont.png"
-dest_files=["res://.godot/imported/NES - Castlevania 3 Draculas Curse - Trevor Belmont.png-84320f93d5ca2d6a0a16940a30425ed3.ctex"]
+source_file="res://Tiles.png"
+dest_files=["res://.godot/imported/Tiles.png-825b95a5145508fffe81ba0fc1c92c0b.ctex"]
 
 [params]
 
