@@ -39,13 +39,12 @@ func _on_area_entered(area) -> void:
 		hit = true
 		print("skeleton hit")
 		health -= 5
-		if health <= 0:
-			death()
+	if health <= 0:
+		death()
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	onScreen = true
-
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	onScreen =false

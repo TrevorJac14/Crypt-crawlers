@@ -28,6 +28,7 @@ project/assembly_name="Crypt Crawlers"
 sword=""
 area_container=""
 player=""
+arrow=""
 
 [input]
 

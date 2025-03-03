@@ -74,6 +74,11 @@ func throw():
 		face_direction = Vector2.LEFT
 	thrown_object.direction = face_direction
 
+
+func _on_area_entered(area) -> void:
+	if area.is_in_group("arrow"):
+		health -= 5
+
 # Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -96,3 +101,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		%MeleeShape.disabled = true
 		is_attacking = false
+
+
+func _on_melee_hitbox_area_entered(area):
+	if is_in_group("arrow"):
+		take_damage(20)

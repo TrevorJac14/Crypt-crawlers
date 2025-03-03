@@ -235,7 +235,7 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ad03d"]
 size = Vector2(617.356, 343.082)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_hemfh")
