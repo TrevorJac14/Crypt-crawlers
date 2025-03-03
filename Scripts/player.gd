@@ -67,13 +67,17 @@ func throw():
 	var face_direction = Vector2.RIGHT
 	get_parent().add_child(thrown_object)
 	
-	thrown_object.global_position = global_position
+	thrown_object.global_position = $ThrowPoint.global_position
 	if throw_direction == 1:
 		face_direction = Vector2.RIGHT
 	elif throw_direction == -1:
 		face_direction = Vector2.LEFT
-	#var facing_direction = Vector2.RIGHT if throw_rection == 1  elif Vector2.LEFT
-	thrown_object.direction = face_direction#global_position.direction_to(global_position + transform.x)
+	thrown_object.direction = face_direction
+
+
+func _on_area_entered(area) -> void:
+	if area.is_in_group("arrow"):
+		health -= 5
 
 # Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
@@ -97,3 +101,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		%MeleeShape.disabled = true
 		is_attacking = false
+
+
+func _on_melee_hitbox_area_entered(area):
+	if is_in_group("arrow"):
+		take_damage(20)

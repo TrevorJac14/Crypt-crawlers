@@ -124,7 +124,7 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ad03d"]
 size = Vector2(617.356, 343.082)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_hemfh")
@@ -158,7 +158,7 @@ debug_color = Color(0.793637, 0.174224, 0.939767, 0.42)
 stream = ExtResource("4_reuyb")
 
 [node name="ThrowPoint" type="Node2D" parent="." groups=["Player"]]
-position = Vector2(7, -9)
+position = Vector2(-3, -4)
 
 [node name="throw_timer" type="Timer" parent="."]
 autostart = true
