@@ -4,18 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://dugxmfys0cb1w" path="res://icon.svg" id="1_acrbu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgm5v"]
-size = Vector2(16, 3)
+size = Vector2(14, 3)
 
-[node name="PlayerThrow" type="Area2D"]
+[node name="PlayerThrow" type="Area2D" groups=["sword"]]
 script = ExtResource("1_7rk7s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.75, -1.5)
-scale = Vector2(0.136719, 0.0234375)
+position = Vector2(2, -1.5)
+scale = Vector2(0.109375, 0.0234375)
 texture = ExtResource("1_acrbu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, -1.5)
+position = Vector2(2, -1.5)
 shape = SubResource("RectangleShape2D_qgm5v")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

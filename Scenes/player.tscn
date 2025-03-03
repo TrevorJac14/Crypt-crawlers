@@ -270,7 +270,7 @@ debug_color = Color(0.793637, 0.174224, 0.939767, 0.42)
 stream = ExtResource("4_reuyb")
 
 [node name="ThrowPoint" type="Node2D" parent="." groups=["Player"]]
-position = Vector2(7, -9)
+position = Vector2(-3, -4)
 
 [node name="throw_timer" type="Timer" parent="."]
 autostart = true
