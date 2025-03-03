@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cupyd8ip2tlls"]
+
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_e2usd"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_e2usd")
+metadata/_edit_group_ = true
+
+[node name="PauseMenuPanel" type="Panel" parent="."]
+offset_left = 4.0
+offset_top = 176.0
+offset_right = 1156.0
+offset_bottom = 487.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 379.0
+offset_top = 78.0
+offset_right = 789.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 57
+text = "Game Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = -79.0
+offset_right = 132.5
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit & Exit"
+
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
