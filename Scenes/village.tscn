@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_jste4"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_g8mqx"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="8_4qkga"]
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="9_2xr6r"]
 [ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="10_gt8in"]
+[ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="11_5qui8"]
+[ext_resource type="PackedScene" uid="uid://d186ua0jt3pge" path="res://Scenes/health_potion.tscn" id="12_rsqdl"]
+[ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="13_0qg0j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lfyq"]
 texture = ExtResource("3_5ik6x")
@@ -524,3 +527,11 @@ position = Vector2(390, 1)
 
 [node name="Skeleton" parent="." instance=ExtResource("10_gt8in")]
 position = Vector2(733, 1)
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_5qui8")]
+
+[node name="health potion" parent="." instance=ExtResource("12_rsqdl")]
+position = Vector2(204, -27)
+
+[node name="mana_potion" parent="." instance=ExtResource("13_0qg0j")]
+position = Vector2(169, -28)
