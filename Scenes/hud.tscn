@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckpive0a1o4l1"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ip7b0"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ip7b0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 157.0
+color = Color(0, 0, 0, 0.121569)
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 157.0

@@ -13,6 +13,11 @@ animations = [{
 "loop": true,
 "name": &"placeholder",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"skeleton",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enmuh"]
