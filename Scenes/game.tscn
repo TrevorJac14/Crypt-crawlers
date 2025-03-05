@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="6_pp1o2"]
 [ext_resource type="FontFile" uid="uid://5kxxqvv4dvuc" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="9_iqgfo"]
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="10_0a6oy"]
-[ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="11_dm75o"]
+[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="11_dm75o"]
 [ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="11_rrv4q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wid5"]
