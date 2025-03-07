@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://8cqnp6q8o52m"]
+
+[ext_resource type="Script" path="res://Scripts/mana_potion.gd" id="1_8c8hf"]
+[ext_resource type="Texture2D" uid="uid://dli421r1vp365" path="res://brackeys_platformer_assets/sprites/mana_potion.png" id="1_a5bty"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5kvyv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a5bty")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_in3lq"]
+radius = 3.0
+height = 10.0
+
+[node name="mana_potion" type="Area2D"]
+script = ExtResource("1_8c8hf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6.25, -3)
+scale = Vector2(0.511905, 0.47619)
+sprite_frames = SubResource("SpriteFrames_5kvyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, -4)
+shape = SubResource("CapsuleShape2D_in3lq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
