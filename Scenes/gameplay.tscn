@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddmawxdlt3pw2"]
 
-[ext_resource type="Script" path="res://Scripts/gameplay.gd" id="1_llq3m"]
+[ext_resource type="Script" path="res://Scripts/gameplay.gd" id="1_mpshx"]
 
 [node name="Gameplay" type="Node2D"]
-script = ExtResource("1_llq3m")
+script = ExtResource("1_mpshx")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
