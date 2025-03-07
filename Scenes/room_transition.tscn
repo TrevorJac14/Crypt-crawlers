@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfjtttne53jlm"]
+
+[ext_resource type="Script" path="res://Scripts/room_transition.gd" id="1_ddjto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xmppn"]
+
+[node name="RoomTransition" type="Area2D"]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_ddjto")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xmppn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
