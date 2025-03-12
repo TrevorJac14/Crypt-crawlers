@@ -531,7 +531,8 @@ position = Vector2(390, 1)
 position = Vector2(733, 1)
 
 [node name="RoomTransition" parent="." instance=ExtResource("11_wtryo")]
-position = Vector2(32, 0)
+position = Vector2(1001, -6)
+scale = Vector2(2, 2)
 
 [node name="Transition_Controller" parent="." instance=ExtResource("12_f5qfd")]
 position = Vector2(40, -41)
