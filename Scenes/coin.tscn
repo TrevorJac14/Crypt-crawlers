@@ -204,6 +204,7 @@ script = ExtResource("1_wpbtg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0hlxi")
 autoplay = "default"
+frame_progress = 0.563508
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_dqghp")

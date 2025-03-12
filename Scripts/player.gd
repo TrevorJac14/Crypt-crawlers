@@ -8,6 +8,9 @@ const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const GRAVITY = 2000.0
 var health = 20
+var max_health = 100
+var mana = 0
+var max_mana = 20
 var is_dead = false
 var is_attacking = false
 var strength = 5
@@ -79,6 +82,18 @@ func _on_area_entered(area) -> void:
 	if area.is_in_group("arrow"):
 		health -= 5
 
+func restore_mana(amount):
+	for i in amount:
+		if mana < max_mana:
+			mana += 1
+			print (mana)
+	
+func restore_health(amount):
+	for i in amount:
+		if health < max_health:
+			health += 1
+			print (health)
+	
 # Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
 	health -= amount

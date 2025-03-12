@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://8cqnp6q8o52m"]
+[gd_scene load_steps=6 format=3 uid="uid://8cqnp6q8o52m"]
 
 [ext_resource type="Script" path="res://Scripts/mana_potion.gd" id="1_8c8hf"]
 [ext_resource type="Texture2D" uid="uid://dli421r1vp365" path="res://brackeys_platformer_assets/sprites/mana_potion.png" id="1_a5bty"]
+[ext_resource type="AudioStream" uid="uid://dcphx2c7v2xwm" path="res://brackeys_platformer_assets/sounds/power_up.wav" id="3_tdojk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5kvyv"]
 animations = [{
@@ -19,6 +20,7 @@ radius = 3.0
 height = 10.0
 
 [node name="mana_potion" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_8c8hf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -29,5 +31,10 @@ sprite_frames = SubResource("SpriteFrames_5kvyv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, -4)
 shape = SubResource("CapsuleShape2D_in3lq")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(6, -3)
+stream = ExtResource("3_tdojk")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
