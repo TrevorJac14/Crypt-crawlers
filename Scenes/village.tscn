@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_jste4"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_g8mqx"]
@@ -445,6 +445,9 @@ sources/2 = SubResource("TileSetAtlasSource_3lfyq")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_w6sb1"]
 distance = -144.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvy6y"]
+size = Vector2(20, 140)
+
 [node name="Village" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
@@ -532,5 +535,12 @@ position = Vector2(32, 0)
 
 [node name="Transition_Controller" parent="." instance=ExtResource("12_f5qfd")]
 position = Vector2(40, -41)
+
+[node name="Invisiblewall" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Invisiblewall"]
+position = Vector2(-31, -56)
+shape = SubResource("RectangleShape2D_qvy6y")
+debug_color = Color(0.369077, 0.610931, 0.222663, 0.42)
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
