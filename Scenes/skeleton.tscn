@@ -1,11 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://cw4gdphqp84nf"]
+[gd_scene load_steps=15 format=3 uid="uid://cw4gdphqp84nf"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_ds7ks"]
+[ext_resource type="Texture2D" uid="uid://by2t0prapbyos" path="res://Skeleton.png" id="2_121bo"]
 [ext_resource type="Texture2D" uid="uid://c3hedpl51giaa" path="res://brackeys_platformer_assets/sprites/skeleton_placeholder.png" id="2_icisc"]
 [ext_resource type="PackedScene" uid="uid://dxkxtu84piv2c" path="res://Scenes/projectile.tscn" id="3_gijse"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_new0u"]
+atlas = ExtResource("2_121bo")
+region = Rect2(6, 48, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euyto"]
+atlas = ExtResource("2_121bo")
+region = Rect2(36, 48, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwwlt"]
+atlas = ExtResource("2_121bo")
+region = Rect2(66, 48, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5twf"]
+atlas = ExtResource("2_121bo")
+region = Rect2(6, 0, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkfni"]
+atlas = ExtResource("2_121bo")
+region = Rect2(6, 0, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f0lt"]
+atlas = ExtResource("2_121bo")
+region = Rect2(36, 0, 30, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwrah"]
+atlas = ExtResource("2_121bo")
+region = Rect2(66, 0, 30, 33)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bd20x"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_new0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euyto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwwlt")
+}],
+"loop": true,
+"name": &"die",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5twf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_icisc")
@@ -14,17 +65,36 @@ animations = [{
 "name": &"placeholder",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkfni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f0lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwrah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f0lt")
+}],
 "loop": true,
-"name": &"skeleton",
+"name": &"walk",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enmuh"]
-size = Vector2(11, 25)
+size = Vector2(21, 38)
+
+[sub_resource type="Curve2D" id="Curve2D_mq265"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -11, 19, 0, 0, 0, 0, -112, 14, 0, 0, 0, 0, 115, 18, 0, 0, 0, 0, -11, 19)
+}
+point_count = 4
 
 [node name="Skeleton" type="Area2D"]
-position = Vector2(1, 0)
+position = Vector2(252, 77)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_ds7ks")
@@ -33,12 +103,13 @@ script = ExtResource("1_ds7ks")
 position = Vector2(-1, -1)
 scale = Vector2(0.96875, 1.39063)
 sprite_frames = SubResource("SpriteFrames_bd20x")
-animation = &"placeholder"
+animation = &"idle"
+frame_progress = 0.569979
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["arrow"]]
 light_mask = 5
 visibility_layer = 5
-position = Vector2(1.5, 0.5)
+position = Vector2(-5.5, 2)
 shape = SubResource("RectangleShape2D_enmuh")
 
 [node name="ShootTimer" type="Timer" parent="."]
@@ -46,12 +117,23 @@ one_shot = true
 autostart = true
 
 [node name="Projectile" parent="." instance=ExtResource("3_gijse")]
-position = Vector2(-2, 1)
+position = Vector2(-9, -2)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0.999999, -1.5)
-scale = Vector2(1.2, 1.45)
+position = Vector2(-5.5, 2)
+scale = Vector2(1.05, 1.9)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, 11.4)
+scale = Vector2(1, 0.4)
+curve = SubResource("Curve2D_mq265")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-11, 19)
+rotation = -3.09213
+rotates = false
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

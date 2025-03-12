@@ -104,5 +104,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func _on_melee_hitbox_area_entered(area):
-	if is_in_group("arrow"):
+	if area.is_in_group("arrow"):
 		take_damage(20)
