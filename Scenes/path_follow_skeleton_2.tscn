@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://jbmdgf01jegj"]
+
+[ext_resource type="Script" path="res://Scripts/path_follow_skeleton_2.gd" id="1_fmgwf"]
+[ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="2_y8ffg"]
+
+[sub_resource type="Curve2D" id="Curve2D_42ovo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -41, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 0, -41, 0)
+}
+point_count = 3
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fmgwf")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_42ovo")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-41, 0)
+rotates = false
+
+[node name="skeleton2" parent="Path2D/PathFollow2D" instance=ExtResource("2_y8ffg")]

@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnklqlnvh1j2o"]
+[gd_scene load_steps=7 format=3 uid="uid://bnklqlnvh1j2o"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_pexki"]
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="2_k78fj"]
-[ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="4_8xot3"]
 [ext_resource type="PackedScene" uid="uid://dj8x2xdkvpc5m" path="res://Scenes/coin.tscn" id="5_1chh0"]
+[ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="5_s41xw"]
+[ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="6_cexd7"]
+[ext_resource type="PackedScene" uid="uid://jbmdgf01jegj" path="res://Scenes/path_follow_skeleton_2.tscn" id="6_fjeft"]
 
 [node name="Debug Room" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pexki")]
-position = Vector2(36, -1)
+position = Vector2(171, -76)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(33, 18)
@@ -22,5 +24,15 @@ layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 65538, 0, 2, 131074, 0, 3, 2, 0
 [node name="Coin" parent="." instance=ExtResource("5_1chh0")]
 position = Vector2(66, -59)
 
-[node name="Skeleton" parent="." instance=ExtResource("4_8xot3")]
-position = Vector2(246, -22)
+[node name="skeleton2" parent="." instance=ExtResource("5_s41xw")]
+position = Vector2(307, -15)
+
+[node name="mana_potion" parent="." instance=ExtResource("6_cexd7")]
+position = Vector2(165, -53)
+
+[node name="mana_potion2" parent="." instance=ExtResource("6_cexd7")]
+position = Vector2(165, -38)
+
+[node name="Node2D" parent="." instance=ExtResource("6_fjeft")]
+position = Vector2(68, -20)
+speed = 50

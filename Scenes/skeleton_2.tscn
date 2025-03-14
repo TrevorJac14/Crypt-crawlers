@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqmxn8sjvuv5e"]
+
+[ext_resource type="Script" path="res://Scripts/skeleton2.gd" id="1_pjhag"]
+[ext_resource type="Texture2D" uid="uid://by2t0prapbyos" path="res://Skeleton.png" id="2_yc2tf"]
+[ext_resource type="PackedScene" uid="uid://dxkxtu84piv2c" path="res://Scenes/projectile.tscn" id="3_721uw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d3sb"]
+atlas = ExtResource("2_yc2tf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qym2w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d3sb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5qaa3"]
+size = Vector2(14, 29)
+
+[node name="skeleton2" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_pjhag")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qym2w")
+animation = &"idle"
+frame_progress = 0.381939
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_5qaa3")
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Projectile" parent="." instance=ExtResource("3_721uw")]
+position = Vector2(-3, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.5, 0.499999)
+scale = Vector2(0.45, 1.55)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
