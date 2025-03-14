@@ -4,6 +4,8 @@ extends Area2D
 @export var shoot_cooldown = 2
 @onready var Player = get_tree().get_first_node_in_group("Player")
 @onready var shoot_timer = $ShootTimer
+@export var stop_duration: float = 1  # Time to stop when shooting
+
 var health = 10
 var hit = false
 var onScreen = false
@@ -15,6 +17,7 @@ var last_position: Vector2
 func _ready():
 	shoot_timer.start(shoot_cooldown)
 	last_position = global_position  # Set initial position
+	$AnimatedSprite2D.play("walk")
 	
 
 	
@@ -25,6 +28,11 @@ func _process(delta):
 	if shoot_timer.is_stopped():
 		shoot()
 		shoot_timer.start(shoot_cooldown)
+	if global_position.distance_to(last_position) > 0.1:
+		$AnimatedSprite2D.play("walk")  # Play walking animation when moving
+	else:
+		$AnimatedSprite2D.play("idle")  # Switch to idle if not moving
+	
 	 # Flip sprite based on movement direction
 	if global_position.x > last_position.x:
 		$AnimatedSprite2D.flip_h = true  # Moving right
@@ -33,23 +41,31 @@ func _process(delta):
 	last_position = global_position  # Update last position
 	
 	
-func play_animation(animation):
-	if animation == "die":
-		$AnimatedSprite2D.play("die")
-
-
 func shoot():
-	if onScreen:
-		var bullet = bullet_scene.instantiate()
-		get_tree().current_scene.add_child(bullet)
-		bullet.direction = global_position.direction_to(Player.global_position)
-		bullet.global_position = global_position
-		bullet.rotation = bullet.direction.angle()
+	if is_player_infront(Player):
+		if onScreen:
+			var bullet = bullet_scene.instantiate()
+			var facing_direction = Vector2.RIGHT if $AnimatedSprite2D.flip_h == true else Vector2.LEFT
+			var path_follow = get_parent()  # Get the PathFollow2D node
+			path_follow.set_process(false)
+			get_tree().current_scene.add_child(bullet)
+			bullet.direction = facing_direction
+			bullet.global_position = global_position
+			bullet.rotation = bullet.direction.angle()
+			await get_tree().create_timer(stop_duration).timeout
+			path_follow.set_process(true)
 
-func death():
-	play_animation("die")
-	queue_free()
 
+func is_player_infront(player: Node2D) -> bool:
+	var player_x = player.global_position.x
+	var enemy_x = global_position.x
+	var facing_right = !$AnimatedSprite2D.flip_h  # Not flipped means facing right
+
+	if facing_right and player_x < enemy_x:
+		return true  # Enemy faces right & player is to the right
+	elif not facing_right and player_x > enemy_x:
+		return true  # Enemy faces left & player is to the left
+	return false
 
 func _on_area_entered(area) -> void:
 	if area.is_in_group("sword"):
@@ -57,7 +73,10 @@ func _on_area_entered(area) -> void:
 		print("skeleton hit")
 		health -= 5
 	if health <= 0:
-		death()
+		print("skeletor slain lol")
+		$AnimatedSprite2D.play("die")
+		#await $AnimatedSprite2D.animation_finished
+		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	print("You bumped into skelly bean")
