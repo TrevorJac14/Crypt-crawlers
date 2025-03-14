@@ -66,16 +66,18 @@ func _physics_process(delta: float) -> void:
 		throw()
 
 func throw():
-	var thrown_object = throw_scene.instantiate()
-	var face_direction = Vector2.RIGHT
-	get_parent().add_child(thrown_object)
+	if mana > 0:
+		mana -= 5
+		var thrown_object = throw_scene.instantiate()
+		var face_direction = Vector2.RIGHT
+		get_parent().add_child(thrown_object)
 	
-	thrown_object.global_position = $ThrowPoint.global_position
-	if throw_direction == 1:
-		face_direction = Vector2.RIGHT
-	elif throw_direction == -1:
-		face_direction = Vector2.LEFT
-	thrown_object.direction = face_direction
+		thrown_object.global_position = $ThrowPoint.global_position
+		if throw_direction == 1:
+			face_direction = Vector2.RIGHT
+		elif throw_direction == -1:
+			face_direction = Vector2.LEFT
+		thrown_object.direction = face_direction
 
 
 func _on_area_entered(area) -> void:

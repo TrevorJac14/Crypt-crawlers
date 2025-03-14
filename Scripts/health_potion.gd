@@ -14,5 +14,10 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
+		print("Health potion triggered by:", body.name)  # Debugging
+		self.hide()
+		$AudioStreamPlayer2D.stop() 
+		$AudioStreamPlayer2D.play()
 		body.restore_health(health_value)
+		await $AudioStreamPlayer2D.finished
 		queue_free() 

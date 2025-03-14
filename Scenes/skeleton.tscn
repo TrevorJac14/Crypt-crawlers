@@ -94,7 +94,7 @@ _data = {
 point_count = 4
 
 [node name="Skeleton" type="Area2D"]
-position = Vector2(252, 77)
+position = Vector2(8, -15)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_ds7ks")
@@ -104,7 +104,6 @@ position = Vector2(-1, -1)
 scale = Vector2(0.96875, 1.39063)
 sprite_frames = SubResource("SpriteFrames_bd20x")
 animation = &"idle"
-frame_progress = 0.569979
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["arrow"]]
 light_mask = 5

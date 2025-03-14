@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d186ua0jt3pge"]
+[gd_scene load_steps=6 format=3 uid="uid://d186ua0jt3pge"]
 
 [ext_resource type="Script" path="res://Scripts/health_potion.gd" id="1_08r4o"]
 [ext_resource type="Texture2D" uid="uid://et123gkh8co3" path="res://brackeys_platformer_assets/sprites/health_potion.png" id="1_ig3fx"]
+[ext_resource type="AudioStream" uid="uid://dyr4yh7nd6kqs" path="res://brackeys_platformer_assets/sounds/coin.wav" id="3_tkkvs"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a7boq"]
 animations = [{
@@ -31,5 +32,8 @@ sprite_frames = SubResource("SpriteFrames_a7boq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -4)
 shape = SubResource("CapsuleShape2D_88x57")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tkkvs")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
