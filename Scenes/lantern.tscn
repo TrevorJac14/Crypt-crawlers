@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://b40mem1oc73ms"]
+
+[ext_resource type="Texture2D" uid="uid://crc718bdpegeb" path="res://Tiles2.png" id="1_a6fan"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqa6b"]
+atlas = ExtResource("1_a6fan")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0lyo"]
+atlas = ExtResource("1_a6fan")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv4bo"]
+atlas = ExtResource("1_a6fan")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_henne"]
+atlas = ExtResource("1_a6fan")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyks0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqa6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0lyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv4bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_henne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Lantern" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_gyks0")
