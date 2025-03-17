@@ -47,13 +47,20 @@ func shoot():
 			var bullet = bullet_scene.instantiate()
 			var facing_direction = Vector2.RIGHT if $AnimatedSprite2D.flip_h == true else Vector2.LEFT
 			var path_follow = get_parent()  # Get the PathFollow2D node
-			path_follow.set_process(false)
+			var previous_speed
+
+			if path_follow is PathFollow2D:
+				previous_speed = path_follow.get("speed")  # Save speed before stopping
+				path_follow.set("speed", 0)  # Stop movement
+
 			get_tree().current_scene.add_child(bullet)
 			bullet.direction = facing_direction
 			bullet.global_position = global_position
 			bullet.rotation = bullet.direction.angle()
 			await get_tree().create_timer(stop_duration).timeout
-			path_follow.set_process(true)
+
+			if path_follow is PathFollow2D:
+				path_follow.set("speed", previous_speed)  # Restore speed
 
 
 func is_player_infront(player: Node2D) -> bool:
