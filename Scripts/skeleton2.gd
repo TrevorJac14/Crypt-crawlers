@@ -4,6 +4,7 @@ extends Area2D
 @export var shoot_cooldown = 2
 @onready var Player = get_tree().get_first_node_in_group("Player")
 @onready var shoot_timer = $ShootTimer
+@onready var path_follow : PathFollow2D = $Path2D/PathFollow2D  # Get the PathFollow2D node
 @export var stop_duration: float = 1  # Time to stop when shooting
 
 var health = 10
@@ -12,6 +13,7 @@ var onScreen = false
 var bullet_scene = load("res://Scenes/projectile.tscn")
 var damage = 5
 var last_position: Vector2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,11 +48,11 @@ func shoot():
 		if onScreen:
 			var bullet = bullet_scene.instantiate()
 			var facing_direction = Vector2.RIGHT if $AnimatedSprite2D.flip_h == true else Vector2.LEFT
-			var path_follow = get_parent()  # Get the PathFollow2D node
 			var previous_speed
 
 			if path_follow is PathFollow2D:
 				previous_speed = path_follow.get("speed")  # Save speed before stopping
+				print(path_follow.get("speed"))
 				path_follow.set("speed", 0)  # Stop movement
 
 			get_tree().current_scene.add_child(bullet)
@@ -58,6 +60,7 @@ func shoot():
 			bullet.global_position = global_position
 			bullet.rotation = bullet.direction.angle()
 			await get_tree().create_timer(stop_duration).timeout
+			
 
 			if path_follow is PathFollow2D:
 				path_follow.set("speed", previous_speed)  # Restore speed
