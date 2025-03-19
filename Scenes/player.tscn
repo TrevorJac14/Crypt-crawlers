@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://bwi3gr4idletr"]
+[gd_scene load_steps=21 format=3 uid="uid://bwi3gr4idletr"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hemfh"]
 [ext_resource type="Texture2D" uid="uid://giyqyyi4jxd2" path="res://Player01.png" id="2_eulsh"]
 [ext_resource type="Texture2D" uid="uid://dbab5n3eqcfh3" path="res://Player.png" id="4_1q7hu"]
 [ext_resource type="AudioStream" uid="uid://bfdhx4jfk7b2j" path="res://brackeys_platformer_assets/sounds/hurt.wav" id="4_reuyb"]
+[ext_resource type="AudioStream" uid="uid://tecgorcptvyj" path="res://brackeys_platformer_assets/sounds/step-dirt.wav" id="5_qbr2i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20svx"]
 atlas = ExtResource("2_eulsh")
@@ -161,6 +162,9 @@ position = Vector2(-3, -4)
 
 [node name="throw_timer" type="Timer" parent="."]
 autostart = true
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qbr2i")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

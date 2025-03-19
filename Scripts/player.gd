@@ -41,6 +41,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
+			$WalkSound.play()
 	elif is_dead == false && is_attacking == false:
 		animated_sprite.play("jump")
 	if direction && is_dead == false:
