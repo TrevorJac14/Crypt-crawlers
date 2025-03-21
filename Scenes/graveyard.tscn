@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbk34h2sfp5s2"]
+[gd_scene load_steps=5 format=3 uid="uid://cbk34h2sfp5s2"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_j4hj1"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_7n0ms"]
 [ext_resource type="PackedScene" uid="uid://cpdidwup57pmj" path="res://Scenes/transition_controller.tscn" id="3_uuter"]
+[ext_resource type="PackedScene" uid="uid://dfjtttne53jlm" path="res://Scenes/room_transition.tscn" id="4_4hkgq"]
 
 [node name="Graveyard" type="Node2D"]
 
@@ -26,3 +27,9 @@ position_smoothing_enabled = true
 
 [node name="Transition_Controller" parent="." instance=ExtResource("3_uuter")]
 position = Vector2(-19, -81)
+
+[node name="RoomTransition" parent="." instance=ExtResource("4_4hkgq")]
+position = Vector2(1288, -59)
+target_level = "res://Scenes/crypt_1.tscn"
+
+[connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
