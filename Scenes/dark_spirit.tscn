@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtwfh7fptvvpw"]
+[gd_scene load_steps=11 format=3 uid="uid://dtwfh7fptvvpw"]
 
 [ext_resource type="Texture2D" uid="uid://cuayx05eot344" path="res://Skull_blue.png" id="1_gppy3"]
 
@@ -64,7 +64,18 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ssgh"]
+
 [node name="DarkSpirit" type="AnimatedSprite2D"]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_xpmpm")
 animation = &"move"
+frame = 2
+frame_progress = 0.0767203
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_2ssgh")
+debug_color = Color(0.990186, 0, 0.281438, 0.42)
