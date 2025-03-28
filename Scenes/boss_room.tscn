@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://di2rwx5wsci5g"]
+[gd_scene load_steps=5 format=3 uid="uid://di2rwx5wsci5g"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_asjuq"]
 [ext_resource type="PackedScene" uid="uid://b40mem1oc73ms" path="res://Scenes/lantern.tscn" id="2_5gbc5"]
 [ext_resource type="PackedScene" uid="uid://cpdidwup57pmj" path="res://Scenes/transition_controller.tscn" id="3_qq2lp"]
+[ext_resource type="AudioStream" uid="uid://c3286jvjibufm" path="res://brackeys_platformer_assets/music/techno-vampire-boss-fight-loop-318677.mp3" id="4_j78vu"]
 
 [node name="BossRoom" type="Node2D"]
 
@@ -19,3 +20,7 @@ position = Vector2(-72, -8)
 
 [node name="Transition_Controller" parent="." instance=ExtResource("3_qq2lp")]
 position = Vector2(-103, -99)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_j78vu")
+autoplay = true

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bt1t6iwryotdb"
+path="res://.godot/imported/Castlevania 3 - Dracula's Curse SFX (40).wav-5c54c4ae2e9dc48950849f9ed5e15548.sample"
+
+[deps]
+
+source_file="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Dracula's Curse SFX (40).wav"
+dest_files=["res://.godot/imported/Castlevania 3 - Dracula's Curse SFX (40).wav-5c54c4ae2e9dc48950849f9ed5e15548.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
