@@ -1,23 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://jvhwvfw8pscq"]
+[gd_scene load_steps=6 format=3 uid="uid://jvhwvfw8pscq"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_qu12l"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_183qb"]
 
+[sub_resource type="Animation" id="Animation_pq8nd"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1u0f7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v02m1"]
+_data = {
+"RESET": SubResource("Animation_1u0f7"),
+"fade_in": SubResource("Animation_pq8nd")
+}
+
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_qu12l")
 
-[node name="GameOverPanel" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0.521569)
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
 offset_left = -1.0
 offset_top = -1.0
-offset_right = 1153.0
-offset_bottom = 649.0
+offset_right = 39.0
+offset_bottom = 39.0
+color = Color(0, 1, 1, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="GameOverPanel" type="Panel" parent="ColorRect"]
+self_modulate = Color(1, 1, 1, 0.521569)
+offset_right = 1154.0
+offset_bottom = 650.0
+
+[node name="Control" type="Control" parent="ColorRect/GameOverPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="Label" type="Label" parent="ColorRect/GameOverPanel"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 74.0
-offset_bottom = 223.0
+offset_left = 1.0
+offset_top = 75.0
+offset_right = 1.0
+offset_bottom = 224.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 80
@@ -25,26 +79,8 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -220.0
-offset_right = 221.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 2
-
-[node name="Try Again" type="Button" parent="."]
+[node name="Try Again" type="Button" parent="ColorRect/GameOverPanel"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -62,16 +98,21 @@ theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 40
 text = "TRY AGAIN"
 
-[node name="Give Up" type="Button" parent="."]
-offset_left = 355.0
-offset_top = 460.0
-offset_right = 1151.0
-offset_bottom = 523.0
+[node name="Give Up" type="Button" parent="ColorRect/GameOverPanel"]
+offset_left = 356.0
+offset_top = 461.0
+offset_right = 1152.0
+offset_bottom = 524.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 40
 text = "GIVE UP"
 
-[connection signal="pressed" from="Try Again" to="." method="_on_try_again_pressed"]
-[connection signal="pressed" from="Give Up" to="." method="_on_give_up_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v02m1")
+}
+
+[connection signal="pressed" from="ColorRect/GameOverPanel/Try Again" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="ColorRect/GameOverPanel/Give Up" to="." method="_on_give_up_pressed"]

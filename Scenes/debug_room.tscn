@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnklqlnvh1j2o"]
+[gd_scene load_steps=12 format=3 uid="uid://bnklqlnvh1j2o"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_pexki"]
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="2_k78fj"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="5_s41xw"]
 [ext_resource type="Script" path="res://Scripts/path_follow_node_skeleton_2.gd" id="6_7uaev"]
 [ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="6_cexd7"]
+[ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="8_2spnr"]
+[ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="9_wxf8o"]
 
 [sub_resource type="Curve2D" id="Curve2D_dhmxg"]
 _data = {
@@ -40,9 +42,6 @@ position = Vector2(66, -59)
 [node name="mana_potion" parent="." instance=ExtResource("6_cexd7")]
 position = Vector2(165, -53)
 
-[node name="mana_potion2" parent="." instance=ExtResource("6_cexd7")]
-position = Vector2(165, -38)
-
 [node name="marching skeleton" type="Node2D" parent="."]
 position = Vector2(69, -27)
 script = ExtResource("5_rpr8y")
@@ -72,3 +71,7 @@ rotates = false
 script = ExtResource("6_7uaev")
 
 [node name="skeleton2" parent="marching skeleton2/Path2D/PathFollow2D" instance=ExtResource("5_s41xw")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_wxf8o")]
+
+[node name="GameOver" parent="." instance=ExtResource("8_2spnr")]

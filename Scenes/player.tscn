@@ -139,6 +139,7 @@ position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_c8cjq")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="Melee hitbox" type="Area2D" parent="." groups=["sword"]]
 position = Vector2(10, -4)

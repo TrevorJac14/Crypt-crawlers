@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+signal has_died
 var throw_scene = load("res://Scenes/player_throw.tscn")
 var throw_direction
 var SPEED = 130.0
@@ -111,9 +111,11 @@ func die() -> void:
 	animated_sprite.play("death")
 	#get_node("CollisionShape2D").queue_free()
 	timer.start()
+	has_died.emit()  # Emit the signal when the player dies
+	
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
