@@ -31,10 +31,10 @@ func _physics_process(delta: float) -> void:
 	#flip the sprite
 	if direction > 0 && is_dead == false:
 		animated_sprite.flip_h = false
-		melee_hitbox.position.x = 10
+		melee_hitbox.position.x = 14
 	elif direction < 0 && is_dead == false:
 		animated_sprite.flip_h = true
-		melee_hitbox.position.x = -10
+		melee_hitbox.position.x = -14
 	#play animations
 	if is_on_floor() && is_dead == false && is_attacking == false:
 		if direction == 0:
