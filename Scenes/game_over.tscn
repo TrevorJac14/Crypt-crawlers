@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://jvhwvfw8pscq"]
+[gd_scene load_steps=3 format=3 uid="uid://jvhwvfw8pscq"]
 
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_qu12l"]
+[ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_183qb"]
 
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_qu12l")
@@ -18,6 +19,7 @@ anchor_right = 1.0
 offset_top = 74.0
 offset_bottom = 223.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 80
 text = "Game Over"
 horizontal_alignment = 1
@@ -56,6 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 40
 text = "TRY AGAIN"
 
@@ -66,5 +69,9 @@ offset_right = 1151.0
 offset_bottom = 523.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_183qb")
 theme_override_font_sizes/font_size = 40
 text = "GIVE UP"
+
+[connection signal="pressed" from="Try Again" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Give Up" to="." method="_on_give_up_pressed"]
