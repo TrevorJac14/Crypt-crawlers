@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="Script" path="res://Scripts/gamemanager.gd" id="1_jste4"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_g8mqx"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dj8x2xdkvpc5m" path="res://Scenes/coin.tscn" id="6_cljq6"]
 [ext_resource type="FontFile" uid="uid://5kxxqvv4dvuc" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="7_ksvos"]
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="8_4qkga"]
+[ext_resource type="AudioStream" uid="uid://dekv6201spefb" path="res://brackeys_platformer_assets/music/protection-racket-229149.mp3" id="8_wllef"]
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="9_2xr6r"]
 [ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="10_gt8in"]
 [ext_resource type="PackedScene" uid="uid://dfjtttne53jlm" path="res://Scenes/room_transition.tscn" id="11_wtryo"]
@@ -517,6 +518,9 @@ text = "W or Space to Jump."
 [node name="Platforms" type="Node" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_wllef")
+autoplay = true
+bus = &"Music"
 
 [node name="Pslime" parent="." instance=ExtResource("8_4qkga")]
 position = Vector2(159, 3)
