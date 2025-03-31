@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4jsmsbbab4tb"
+path="res://.godot/imported/Castlevania 3 - Hit enemy.wav-328e0adb127c4ddd2f47d079deae3819.sample"
+
+[deps]
+
+source_file="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Hit enemy.wav"
+dest_files=["res://.godot/imported/Castlevania 3 - Hit enemy.wav-328e0adb127c4ddd2f47d079deae3819.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
