@@ -3,21 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="1_qu12l"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_183qb"]
 
-[sub_resource type="Animation" id="Animation_pq8nd"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_1u0f7"]
 length = 0.001
 tracks/0/type = "value"
@@ -31,6 +16,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pq8nd"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v02m1"]
@@ -53,6 +53,7 @@ color = Color(0, 1, 1, 1)
 
 [node name="GameOverPanel" type="Panel" parent="ColorRect"]
 self_modulate = Color(1, 1, 1, 0.521569)
+layout_mode = 0
 offset_right = 1154.0
 offset_bottom = 650.0
 
@@ -99,6 +100,7 @@ theme_override_font_sizes/font_size = 40
 text = "TRY AGAIN"
 
 [node name="Give Up" type="Button" parent="ColorRect/GameOverPanel"]
+layout_mode = 0
 offset_left = 356.0
 offset_top = 461.0
 offset_right = 1152.0

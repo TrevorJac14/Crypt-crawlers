@@ -31,4 +31,5 @@ func _on_give_up_pressed():
 
 
 func _on_try_again_pressed():
+	Engine.time_scale = 1
 	get_tree().reload_current_scene()  # Reloads the current game scene

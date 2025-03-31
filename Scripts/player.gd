@@ -11,9 +11,12 @@ var health = 100
 var max_health = 100
 var mana = 10
 var max_mana = 20
+var can_take_damage = true
 var is_dead = false
 var is_attacking = false
+var is_knocked_back = false
 var strength = 5
+var enemy_position
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
@@ -29,10 +32,10 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
 	#flip the sprite
-	if direction > 0 && is_dead == false:
+	if direction > 0 && is_dead == false && !is_knocked_back:
 		animated_sprite.flip_h = false
 		melee_hitbox.position.x = 14
-	elif direction < 0 && is_dead == false:
+	elif direction < 0 && is_dead == false && !is_knocked_back:
 		animated_sprite.flip_h = true
 		melee_hitbox.position.x = -14
 	#play animations
@@ -99,14 +102,29 @@ func restore_health(amount):
 	
 # Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
-	health -= amount
-	print("Player health:", health)
-	$AudioStreamPlayer2D.play()
-	if health <= 0:
-		die()
+	if can_take_damage:
+		health -= amount
+		print("Player health:", health)
+		$AudioStreamPlayer2D.play()
+		apply_knockback(amount)
+		if health <= 0:
+			die()
+
+func apply_knockback(amount):
+	is_knocked_back = true
+	velocity.y = JUMP_VELOCITY
+	can_take_damage = false
+	$AnimatedSprite2D.self_modulate = Color(256,00,00,125)
+	await get_tree().create_timer(1.0).timeout
+	is_knocked_back = false
+	$AnimatedSprite2D.self_modulate = Color(1,1,1,1)
+	if !is_dead:
+		can_take_damage = true
+
 func die() -> void:
 	print("You died")
 	is_dead = true
+	can_take_damage = false
 	Engine.time_scale = 0.5
 	animated_sprite.play("death")
 	#get_node("CollisionShape2D").queue_free()
