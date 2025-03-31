@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdd7aorf8403r"]
 
 [ext_resource type="Script" path="res://Scripts/player_throw.gd" id="1_7rk7s"]
-[ext_resource type="Texture2D" uid="uid://dugxmfys0cb1w" path="res://icon.svg" id="1_acrbu"]
+[ext_resource type="Texture2D" uid="uid://bkdxdgj2sgvjc" path="res://brackeys_platformer_assets/sprites/Blizara.png" id="2_stt7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgm5v"]
-size = Vector2(14, 3)
+size = Vector2(23, 10)
 
 [node name="PlayerThrow" type="Area2D" groups=["sword"]]
 script = ExtResource("1_7rk7s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, -1.5)
-scale = Vector2(0.109375, 0.0234375)
-texture = ExtResource("1_acrbu")
+position = Vector2(-4.76837e-07, -4.76837e-07)
+rotation = 0.785398
+scale = Vector2(0.056274, 0.0507189)
+texture = ExtResource("2_stt7j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -1.5)
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_qgm5v")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

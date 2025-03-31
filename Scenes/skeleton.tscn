@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cw4gdphqp84nf"]
+[gd_scene load_steps=17 format=3 uid="uid://cw4gdphqp84nf"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton.gd" id="1_ds7ks"]
 [ext_resource type="Texture2D" uid="uid://by2t0prapbyos" path="res://Skeleton.png" id="2_121bo"]
 [ext_resource type="Texture2D" uid="uid://c3hedpl51giaa" path="res://brackeys_platformer_assets/sprites/skeleton_placeholder.png" id="2_icisc"]
 [ext_resource type="PackedScene" uid="uid://dxkxtu84piv2c" path="res://Scenes/projectile.tscn" id="3_gijse"]
+[ext_resource type="AudioStream" uid="uid://c4jsmsbbab4tb" path="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Hit enemy.wav" id="5_86wfu"]
+[ext_resource type="AudioStream" uid="uid://5eue5a50bkj5" path="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Enemy killed.wav" id="6_h8b2o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_new0u"]
 atlas = ExtResource("2_121bo")
@@ -45,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qwwlt")
 }],
-"loop": true,
+"loop": false,
 "name": &"die",
 "speed": 6.0
 }, {
@@ -104,7 +106,7 @@ self_modulate = Color(0.929412, 0.0980392, 0.219608, 1)
 position = Vector2(-1.26562, 2.4727)
 scale = Vector2(0.951042, 1.18016)
 sprite_frames = SubResource("SpriteFrames_bd20x")
-animation = &"idle"
+animation = &"die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["arrow"]]
 light_mask = 5
@@ -133,7 +135,14 @@ position = Vector2(-11, 19)
 rotation = -3.09213
 rotates = false
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_86wfu")
+
+[node name="Deathsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_h8b2o")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="finished" from="Deathsound" to="." method="_on_deathsound_finished"]

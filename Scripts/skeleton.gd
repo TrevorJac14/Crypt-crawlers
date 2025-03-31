@@ -1,6 +1,7 @@
 extends Area2D
 
-
+@onready var audio_stream = $AudioStreamPlayer2D
+@onready var deathsound = $Deathsound
 @export var shoot_cooldown = 2
 @export var path: Path2D  # Assign in Inspector
 @export var speed: float = 100.0  # Movement speed
@@ -51,7 +52,7 @@ func shoot():
 
 func death():
 	play_animation("die")
-	queue_free()
+	deathsound.play()
 
 
 func _on_area_entered(area) -> void:
@@ -59,6 +60,7 @@ func _on_area_entered(area) -> void:
 		hit = true
 		print("skeleton hit")
 		health -= 5
+		audio_stream.play()
 	if health <= 0:
 		death()
 
@@ -72,3 +74,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	onScreen =false
+
+
+func _on_deathsound_finished() -> void:
+	queue_free()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/mana_potion.gd" id="1_8c8hf"]
 [ext_resource type="Texture2D" uid="uid://dli421r1vp365" path="res://brackeys_platformer_assets/sprites/mana_potion.png" id="1_a5bty"]
-[ext_resource type="AudioStream" uid="uid://dyr4yh7nd6kqs" path="res://brackeys_platformer_assets/sounds/coin.wav" id="3_gee4e"]
+[ext_resource type="AudioStream" uid="uid://f3addt16iert" path="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Pickup.wav" id="3_7tr6x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5kvyv"]
 animations = [{
@@ -34,7 +34,7 @@ shape = SubResource("CapsuleShape2D_in3lq")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(6, -3)
-stream = ExtResource("3_gee4e")
+stream = ExtResource("3_7tr6x")
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
