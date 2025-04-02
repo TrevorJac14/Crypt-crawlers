@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddmawxdlt3pw2"]
 
 [ext_resource type="Script" path="res://Scripts/gameplay.gd" id="1_mpshx"]
-[ext_resource type="FontFile" uid="uid://5kxxqvv4dvuc" path="res://brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_rfla5"]
+[ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="2_au12b"]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_mpshx")
@@ -10,64 +10,8 @@ script = ExtResource("1_mpshx")
 wait_time = 0.5
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 150.0
-grow_horizontal = 2
-color = Color(0.0629493, 0.11492, 0.284842, 1)
-
-[node name="HP Label" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 7.0
-offset_right = 192.0
-offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("2_rfla5")
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="CanvasLayer/Control/HP Label"]
-unique_name_in_owner = true
-modulate = Color(0.219608, 0.894118, 0.45098, 1)
-self_modulate = Color(0.219723, 0.89274, 0.450053, 1)
-layout_mode = 0
-offset_left = -2.0
-offset_top = 18.0
-offset_right = 198.0
-offset_bottom = 45.0
-value = 100.0
-show_percentage = false
-
-[node name="MP Label" type="Label" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 54.0
-offset_right = 41.0
-offset_bottom = 77.0
-theme_override_fonts/font = ExtResource("2_rfla5")
-text = "MP"
-
-[node name="MPBar" type="ProgressBar" parent="CanvasLayer/Control/MP Label"]
-unique_name_in_owner = true
-modulate = Color(0.19308, 0.527317, 0.966487, 1)
-layout_mode = 0
-offset_top = 23.0
-offset_right = 106.0
-offset_bottom = 50.0
-value = 100.0
-show_percentage = false
-
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+
+[node name="GameOver" parent="." instance=ExtResource("2_au12b")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

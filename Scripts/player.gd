@@ -1,5 +1,6 @@
 extends CharacterBody2D
-
+@onready var hp_bar = $Control/HPBar
+@onready var mp_bar = $Control/MPBar
 signal has_died
 var throw_scene = load("res://Scenes/player_throw.tscn")
 var throw_direction
@@ -9,14 +10,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const GRAVITY = 2000.0
 var health = 100
 var max_health = 100
-var mana = 10
-var max_mana = 20
-var can_take_damage = true
+var mana = 50
+var max_mana = 50
 var is_dead = false
 var is_attacking = false
-var is_knocked_back = false
 var strength = 5
-var enemy_position
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
@@ -32,10 +30,10 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction := Input.get_axis("move_left", "move_right")
 	#flip the sprite
-	if direction > 0 && is_dead == false && !is_knocked_back:
+	if direction > 0 && is_dead == false:
 		animated_sprite.flip_h = false
 		melee_hitbox.position.x = 14
-	elif direction < 0 && is_dead == false && !is_knocked_back:
+	elif direction < 0 && is_dead == false:
 		animated_sprite.flip_h = true
 		melee_hitbox.position.x = -14
 	#play animations
@@ -72,6 +70,7 @@ func _physics_process(delta: float) -> void:
 func throw():
 	if mana > 0:
 		mana -= 5
+		mp_bar.value = mana
 		var thrown_object = throw_scene.instantiate()
 		var face_direction = Vector2.RIGHT
 		get_parent().add_child(thrown_object)
@@ -91,40 +90,26 @@ func _on_area_entered(area) -> void:
 func restore_mana(amount):
 	for i in amount:
 		if mana < max_mana:
-			mana += 1
+			mana += 50
 			print (mana)
 	
 func restore_health(amount):
 	for i in amount:
 		if health < max_health:
-			health += 1
+			health += 50
 			print (health)
 	
 # Handles Subweapon Attacking
 func take_damage(amount: int) -> void:
-	if can_take_damage:
-		health -= amount
-		print("Player health:", health)
-		$AudioStreamPlayer2D.play()
-		apply_knockback(amount)
-		if health <= 0:
-			die()
-
-func apply_knockback(amount):
-	is_knocked_back = true
-	velocity.y = JUMP_VELOCITY
-	can_take_damage = false
-	$AnimatedSprite2D.self_modulate = Color(256,00,00,125)
-	await get_tree().create_timer(1.0).timeout
-	is_knocked_back = false
-	$AnimatedSprite2D.self_modulate = Color(1,1,1,1)
-	if !is_dead:
-		can_take_damage = true
-
+	health -= amount
+	print("Player health:", health)
+	$AudioStreamPlayer2D.play()
+	hp_bar.value = health
+	if health <= 0:
+		die()
 func die() -> void:
 	print("You died")
 	is_dead = true
-	can_take_damage = false
 	Engine.time_scale = 0.5
 	animated_sprite.play("death")
 	#get_node("CollisionShape2D").queue_free()
@@ -144,3 +129,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_melee_hitbox_area_entered(area):
 	if area.is_in_group("arrow"):
 		take_damage(20)
+
+func showing_bars():
+	if mp_bar.value < 50:
+		mp_bar.show
+	else:
+		mp_bar.hide
+	if hp_bar.value < 100:
+		hp_bar.show
+	else:
+		hp_bar.hide

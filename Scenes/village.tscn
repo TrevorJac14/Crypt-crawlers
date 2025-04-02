@@ -507,10 +507,10 @@ position = Vector2(311, 5)
 [node name="Labels" type="Node" parent="."]
 
 [node name="Label" type="Label" parent="Labels"]
-offset_left = -62.0
-offset_top = -24.0
-offset_right = 60.0
-offset_bottom = -9.0
+offset_left = -21.0
+offset_top = -30.0
+offset_right = 101.0
+offset_bottom = -15.0
 theme_override_fonts/font = ExtResource("7_ksvos")
 theme_override_font_sizes/font_size = 8
 text = "W or Space to Jump."
