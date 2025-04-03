@@ -169,5 +169,34 @@ autostart = true
 stream = ExtResource("5_qbr2i")
 bus = &"SFX"
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -20.0
+offset_top = -41.0
+offset_right = 9.0
+offset_bottom = -31.0
+
+[node name="HPBar" type="ProgressBar" parent="Control"]
+modulate = Color(1, 0, 0.0941176, 1)
+self_modulate = Color(1, 0, 0.0941176, 1)
+visibility_layer = 3
+offset_left = 11.0
+offset_right = 29.0
+offset_bottom = 5.0
+value = 100.0
+show_percentage = false
+
+[node name="MPBar" type="ProgressBar" parent="Control"]
+modulate = Color(0, 0.623529, 1, 1)
+self_modulate = Color(0, 0.623529, 1, 1)
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 29.0
+offset_bottom = 10.0
+max_value = 50.0
+value = 50.0
+show_percentage = false
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

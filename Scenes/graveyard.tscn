@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbk34h2sfp5s2"]
+[gd_scene load_steps=9 format=3 uid="uid://cbk34h2sfp5s2"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_j4hj1"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_7n0ms"]
 [ext_resource type="PackedScene" uid="uid://cpdidwup57pmj" path="res://Scenes/transition_controller.tscn" id="3_uuter"]
 [ext_resource type="PackedScene" uid="uid://dfjtttne53jlm" path="res://Scenes/room_transition.tscn" id="4_4hkgq"]
 [ext_resource type="AudioStream" uid="uid://dekv6201spefb" path="res://brackeys_platformer_assets/music/protection-racket-229149.mp3" id="5_nj5t1"]
+[ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="6_dolvp"]
+[ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="7_v1v5o"]
+[ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="8_kafwl"]
 
 [node name="Graveyard" type="Node2D"]
 
@@ -37,5 +40,17 @@ target_level = "res://Scenes/crypt_1.tscn"
 stream = ExtResource("5_nj5t1")
 autoplay = true
 bus = &"Music"
+
+[node name="skeleton2" parent="." instance=ExtResource("6_dolvp")]
+position = Vector2(127, -17)
+
+[node name="Pslime" parent="." instance=ExtResource("7_v1v5o")]
+position = Vector2(219, -12)
+
+[node name="skeleton3" parent="." instance=ExtResource("6_dolvp")]
+position = Vector2(698, -49)
+
+[node name="Slime" parent="." instance=ExtResource("8_kafwl")]
+position = Vector2(898, -43)
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
