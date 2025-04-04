@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="Texture2D" uid="uid://t552cyb741ih" path="res://Tiles.png" id="3_5ik6x"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="4_c8iss"]
@@ -8,8 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://dekv6201spefb" path="res://brackeys_platformer_assets/music/protection-racket-229149.mp3" id="8_wllef"]
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="9_2xr6r"]
 [ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="10_gt8in"]
+[ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="11_5kpte"]
 [ext_resource type="PackedScene" uid="uid://dfjtttne53jlm" path="res://Scenes/room_transition.tscn" id="11_wtryo"]
 [ext_resource type="PackedScene" uid="uid://cpdidwup57pmj" path="res://Scenes/transition_controller.tscn" id="12_f5qfd"]
+[ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="12_n74a7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lfyq"]
 texture = ExtResource("3_5ik6x")
@@ -514,5 +516,9 @@ scale = Vector2(2, 2)
 
 [node name="Transition_Controller" parent="." instance=ExtResource("12_f5qfd")]
 position = Vector2(40, -41)
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_5kpte")]
+
+[node name="GameOver" parent="." instance=ExtResource("12_n74a7")]
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]

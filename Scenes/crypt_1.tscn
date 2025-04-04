@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0mljg58ucuav"]
+[gd_scene load_steps=12 format=3 uid="uid://c0mljg58ucuav"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_bbj3r"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_4w66r"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="7_k6u26"]
 [ext_resource type="PackedScene" uid="uid://cw4gdphqp84nf" path="res://Scenes/skeleton.tscn" id="8_n8ytq"]
 [ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="9_ennnu"]
+[ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="10_4seuf"]
+[ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="11_g14hj"]
 
 [node name="Crypt1" type="Node2D"]
 
@@ -95,5 +97,9 @@ position = Vector2(494, 42)
 
 [node name="skeleton2" parent="." instance=ExtResource("9_ennnu")]
 position = Vector2(390, 96)
+
+[node name="GameOver" parent="." instance=ExtResource("10_4seuf")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_g14hj")]
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
