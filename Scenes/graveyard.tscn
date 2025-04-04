@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbk34h2sfp5s2"]
+[gd_scene load_steps=11 format=3 uid="uid://cbk34h2sfp5s2"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_j4hj1"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_7n0ms"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="6_dolvp"]
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="7_v1v5o"]
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="8_kafwl"]
+[ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="9_v0117"]
+[ext_resource type="PackedScene" uid="uid://d186ua0jt3pge" path="res://Scenes/health_potion.tscn" id="10_ln6rl"]
 
 [node name="Graveyard" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-80.0, 1624.0]
+metadata/_edit_horizontal_guides_ = [-304.0, 21.0, 9.0]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_j4hj1")
@@ -25,7 +29,10 @@ position = Vector2(39, -1)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(2, -60)
 zoom = Vector2(4, 4)
-limit_bottom = 70
+limit_left = -80
+limit_top = -304
+limit_right = 1624
+limit_bottom = 9
 limit_smoothed = true
 position_smoothing_enabled = true
 
@@ -52,5 +59,11 @@ position = Vector2(698, -49)
 
 [node name="Slime" parent="." instance=ExtResource("8_kafwl")]
 position = Vector2(898, -43)
+
+[node name="mana_potion" parent="." instance=ExtResource("9_v0117")]
+position = Vector2(420, -34)
+
+[node name="health potion" parent="." instance=ExtResource("10_ln6rl")]
+position = Vector2(643, -54)
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
