@@ -196,8 +196,7 @@ offset_left = 11.0
 offset_top = 5.0
 offset_right = 29.0
 offset_bottom = 10.0
-max_value = 50.0
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="CanThrowTimer" type="Timer" parent="."]
