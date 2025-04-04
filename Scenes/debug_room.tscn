@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnklqlnvh1j2o"]
+[gd_scene load_steps=9 format=3 uid="uid://bnklqlnvh1j2o"]
 
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="1_pexki"]
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="2_k78fj"]
 [ext_resource type="PackedScene" uid="uid://dj8x2xdkvpc5m" path="res://Scenes/coin.tscn" id="5_1chh0"]
 [ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="6_cexd7"]
 [ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="8_2spnr"]
+[ext_resource type="PackedScene" uid="uid://jbmdgf01jegj" path="res://Scenes/path_follow_skeleton_2.tscn" id="8_bj4wk"]
 [ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="9_wxf8o"]
 [ext_resource type="PackedScene" uid="uid://uanvtj0qhtpw" path="res://Scenes/boss.tscn" id="10_3i3ec"]
 
@@ -34,3 +35,6 @@ position = Vector2(30, -14)
 
 [node name="boss" parent="." instance=ExtResource("10_3i3ec")]
 position = Vector2(179, -85)
+
+[node name="marching skeleton" parent="." instance=ExtResource("8_bj4wk")]
+position = Vector2(201, -19)
