@@ -24,6 +24,7 @@ func get_player_camera():
 
 func move(delta):
 	if is_chase:
+		Player = get_tree().get_first_node_in_group("player")
 		velocity = position.direction_to(Player.position) * (speed * 4)
 		dir  = abs(velocity) / velocity
 		move_and_slide()
