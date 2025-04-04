@@ -14,6 +14,7 @@ var hit = false
 var onScreen = false
 var bullet_scene = load("res://Scenes/projectile.tscn")
 var damage = 5
+var is_dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +27,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	Player = get_tree().get_first_node_in_group("Player")
 	if shoot_timer.is_stopped():
 		shoot()
 		shoot_timer.start(shoot_cooldown)
@@ -43,14 +45,20 @@ func play_animation(animation):
 
 
 func shoot():
-	if onScreen:
-		var bullet = bullet_scene.instantiate()
-		add_child(bullet)
-		bullet.direction = global_position.direction_to(Player.global_position)
-		bullet.global_position = global_position
-		bullet.rotation = bullet.direction.angle()
+	if !is_dead:
+		if onScreen:
+			if Player.global_position.x > global_position.x:
+				$AnimatedSprite2D.flip_h = true
+			else:
+				$AnimatedSprite2D.flip_h = false
+			var bullet = bullet_scene.instantiate()
+			add_child(bullet)
+			bullet.direction = global_position.direction_to(Player.global_position)
+			bullet.global_position = global_position
+			bullet.rotation = bullet.direction.angle()
 
 func death():
+	is_dead = true
 	play_animation("die")
 	deathsound.play()
 

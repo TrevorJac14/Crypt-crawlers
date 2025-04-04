@@ -15,6 +15,7 @@ var max_mana = 100
 var can_take_damage = true
 var is_dead = false
 var is_attacking = false
+var can_throw = true
 var is_knocked_back = false
 var strength = 5
 var enemy_position
@@ -22,6 +23,9 @@ var enemy_position
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $Timer
 @onready var melee_hitbox = $"Melee hitbox"
+
+func _ready():
+	$CanThrowTimer.start()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -71,19 +75,22 @@ func _physics_process(delta: float) -> void:
 		throw()
 
 func throw():
-	if mana > 0:
-		mana -= 5
-		mp_bar.value = mana
-		var thrown_object = throw_scene.instantiate()
-		var face_direction = Vector2.RIGHT
-		get_parent().add_child(thrown_object)
-	
-		thrown_object.global_position = $ThrowPoint.global_position
-		if throw_direction == 1:
-			face_direction = Vector2.RIGHT
-		elif throw_direction == -1:
-			face_direction = Vector2.LEFT
-		thrown_object.direction = face_direction
+	if can_throw:
+		can_throw = false
+		$CanThrowTimer.start()
+		if mana > 0:
+			mana -= 5
+			mp_bar.value = mana
+			var thrown_object = throw_scene.instantiate()
+			var face_direction = Vector2.RIGHT
+			get_parent().add_child(thrown_object)
+		
+			thrown_object.global_position = $ThrowPoint.global_position
+			if throw_direction == 1:
+				face_direction = Vector2.RIGHT
+			elif throw_direction == -1:
+				face_direction = Vector2.LEFT
+			thrown_object.direction = face_direction
 
 
 func _on_area_entered(area) -> void:
@@ -157,3 +164,7 @@ func showing_bars():
 		hp_bar.show
 	else:
 		hp_bar.hide
+
+
+func _on_can_throw_timer_timeout():
+	can_throw = true
