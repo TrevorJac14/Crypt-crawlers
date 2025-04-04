@@ -9,6 +9,7 @@ extends Area2D
 
 var health = 10
 var hit = false
+var dead = false
 var onScreen = false
 var bullet_scene = load("res://Scenes/projectile.tscn")
 var damage = 5
@@ -30,10 +31,12 @@ func _process(delta):
 	if shoot_timer.is_stopped():
 		shoot()
 		shoot_timer.start(shoot_cooldown)
-	if global_position.distance_to(last_position) > 0.1:
-		$AnimatedSprite2D.play("walk")  # Play walking animation when moving
-	else:
-		$AnimatedSprite2D.play("idle")  # Switch to idle if not moving
+	if !dead:
+		if global_position.distance_to(last_position) > 0.1:
+			
+			$AnimatedSprite2D.play("walk")  # Play walking animation when moving
+		else:
+			$AnimatedSprite2D.play("idle")  # Switch to idle if not moving
 	
 	 # Flip sprite based on movement direction
 	if global_position.x > last_position.x:
@@ -53,18 +56,19 @@ func stop_movement():
 
 func shoot():
 	if is_player_infront(Player):
-		if onScreen:
-			var bullet = bullet_scene.instantiate()
-			var facing_direction = Vector2.RIGHT if $AnimatedSprite2D.flip_h == true else Vector2.LEFT
-			var previous_speed
+		if !dead:
+			if onScreen:
+				var bullet = bullet_scene.instantiate()
+				var facing_direction = Vector2.RIGHT if $AnimatedSprite2D.flip_h == true else Vector2.LEFT
+				var previous_speed
 
-			stop_movement()
+				stop_movement()
 
-			get_tree().current_scene.add_child(bullet)
-			bullet.direction = facing_direction
-			bullet.global_position = global_position
-			bullet.rotation = bullet.direction.angle()
-			await get_tree().create_timer(stop_duration).timeout
+				get_tree().current_scene.add_child(bullet)
+				bullet.direction = facing_direction
+				bullet.global_position = global_position
+				bullet.rotation = bullet.direction.angle()
+				await get_tree().create_timer(stop_duration).timeout
 			
 
 func is_player_infront(player: Node2D) -> bool:
@@ -78,6 +82,14 @@ func is_player_infront(player: Node2D) -> bool:
 		return true  # Enemy faces left & player is to the left
 	return false
 
+
+func play_animation(animation):
+	if animation == "die":
+		$AnimatedSprite2D.play("die")
+		$Deathsound.play()
+	if animation == "idle":
+		$AnimatedSprite2D.play("idle")
+
 func _on_area_entered(area) -> void:
 	if area.is_in_group("sword"):
 		hit = true
@@ -85,9 +97,13 @@ func _on_area_entered(area) -> void:
 		health -= 5
 	if health <= 0:
 		print("skeletor slain lol")
-		$AnimatedSprite2D.play("die")
-		#await $AnimatedSprite2D.animation_finished
-		queue_free()
+		dead = true
+		var path_follow = get_parent()  # Get parent PathFollow2D
+		if path_follow is PathFollow2D:
+			path_follow.moving = false 
+			play_animation("die")
+		
+		
 
 func _on_body_entered(body: Node2D) -> void:
 	print("You bumped into skelly bean")
@@ -99,3 +115,6 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	onScreen =false
+
+func _on_deathsound_finished() -> void:
+	queue_free()
