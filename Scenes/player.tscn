@@ -181,6 +181,7 @@ offset_bottom = -31.0
 modulate = Color(1, 0, 0.0941176, 1)
 self_modulate = Color(1, 0, 0.0941176, 1)
 visibility_layer = 3
+layout_mode = 0
 offset_left = 11.0
 offset_right = 29.0
 offset_bottom = 5.0
@@ -190,6 +191,7 @@ show_percentage = false
 [node name="MPBar" type="ProgressBar" parent="Control"]
 modulate = Color(0, 0.623529, 1, 1)
 self_modulate = Color(0, 0.623529, 1, 1)
+layout_mode = 0
 offset_left = 11.0
 offset_top = 5.0
 offset_right = 29.0

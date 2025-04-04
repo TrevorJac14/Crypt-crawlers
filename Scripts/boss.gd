@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
-const speed = 30
+const speed = 25
+var deceleration = 30.0  # Adjust as needed
 var dir: Vector2
 var is_chase: bool
 var damage = 50
+
 @onready var Player = get_tree().get_first_node_in_group("player")
 
 # Called when the node enters the scene tree for the first time.
@@ -17,18 +19,21 @@ func _process(delta):
 	handle_animation()
 
 
+func get_player_camera():
+	return Player.get_node("Camera2D")
+
 func move(delta):
 	if is_chase:
-		if position.y == Player.position.y:
-			velocity = position.direction_to(Player.position) * (speed * 4)
-			dir.x  = abs(velocity.x) / velocity.x
-		elif position.y != Player.position.y:
-			velocity.y = position.direction_to(Player.position).y * (speed * 2)
-			velocity.x = position.direction_to(Player.position).x * (speed * 3)
-			dir.x  = abs(velocity.x) / velocity.x
+		velocity = position.direction_to(Player.position) * (speed * 4)
+		dir  = abs(velocity) / velocity
+		move_and_slide()
 	elif !is_chase:
-		velocity += dir * speed * delta
-	move_and_slide()
+		velocity += (dir * speed * delta)
+		if velocity.length() > 15:
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+		move_and_slide()
+
+
 
 
 func choose(array):
