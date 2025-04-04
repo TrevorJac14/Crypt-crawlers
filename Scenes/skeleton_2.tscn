@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqmxn8sjvuv5e"]
+[gd_scene load_steps=15 format=3 uid="uid://cqmxn8sjvuv5e"]
 
 [ext_resource type="Script" path="res://Scripts/skeleton2.gd" id="1_pjhag"]
 [ext_resource type="Texture2D" uid="uid://by2t0prapbyos" path="res://Skeleton.png" id="2_yc2tf"]
 [ext_resource type="PackedScene" uid="uid://dxkxtu84piv2c" path="res://Scenes/projectile.tscn" id="3_721uw"]
+[ext_resource type="AudioStream" uid="uid://c4jsmsbbab4tb" path="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Hit enemy.wav" id="4_7ukfm"]
 [ext_resource type="AudioStream" uid="uid://5eue5a50bkj5" path="res://brackeys_platformer_assets/sounds/NES - Castlevania 3 Draculas Curse - Sound Effects (1)/Castlevania 3 - Enemy killed.wav" id="4_iqxqj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jeqsu"]
@@ -105,6 +106,7 @@ position = Vector2(1.5, 0.499999)
 scale = Vector2(0.45, 1.55)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7ukfm")
 
 [node name="Deathsound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_iqxqj")

@@ -94,6 +94,7 @@ func _on_area_entered(area) -> void:
 	if area.is_in_group("sword"):
 		hit = true
 		print("skeleton hit")
+		$AudioStreamPlayer2D.play()
 		health -= 5
 	if health <= 0:
 		print("skeletor slain lol")

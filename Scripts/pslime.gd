@@ -14,6 +14,7 @@ func _on_area_entered(area) -> void:
 	if area.is_in_group("sword"):
 		hit = true
 		$AnimatedSprite2D.play("hurt")
+		$AudioStreamPlayer2D.play()
 		health -= 5
 
 func death():
