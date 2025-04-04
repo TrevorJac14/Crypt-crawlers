@@ -491,8 +491,6 @@ text = "W or Space to Jump.
 Left click to attack
 F to cast ice"
 
-[node name="Platforms" type="Node" parent="."]
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_wllef")
 autoplay = true
