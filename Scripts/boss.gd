@@ -4,7 +4,7 @@ const speed = 25
 var deceleration = 45.0  # Adjust as needed
 var dir: Vector2
 var is_chase: bool
-var damage = 34
+var damage = 15
 var health = 10
 var dead = false
 
@@ -75,7 +75,7 @@ func _on_chase_timer_timeout():
 
 func _on_interval_timer_timeout():
 	if !dead:
-		var mode_shift = choose([1,1,2])
+		var mode_shift = choose([1,2])
 		if mode_shift == 2:
 			is_chase = true
 		elif mode_shift == 1:
@@ -101,7 +101,7 @@ func _on_audio_stream_player_2d_finished():
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("sword"):
-		health -= 10
+		health -= 1
 		print("BOSS HIT")
 		$HItAudioStreamPlayer2D.play()
 		if health <= 0:

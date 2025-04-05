@@ -9,7 +9,7 @@ extends Area2D
 @onready var shoot_timer = $ShootTimer
 var progress: float = 0.0  # Track movement along the path
 var curve: Curve2D  # Stores the path's curve
-var health = 10
+var health = 5
 var hit = false
 var onScreen = false
 var bullet_scene = load("res://Scenes/projectile.tscn")
@@ -59,6 +59,8 @@ func shoot():
 
 func death():
 	is_dead = true
+	var bullet = bullet_scene.instantiate()
+	remove_child(bullet)
 	play_animation("die")
 	deathsound.play()
 
@@ -74,8 +76,9 @@ func _on_area_entered(area) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	print("You bumped into skelly bean")
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
+	if !is_dead:
+		if body.has_method("take_damage") and !is_dead:
+			body.take_damage(damage)
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	onScreen = true

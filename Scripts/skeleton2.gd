@@ -7,7 +7,7 @@ extends Area2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D  # Get the PathFollow2D node
 @export var stop_duration: float = .75  # Time to stop when shooting
 
-var health = 10
+var health = 5
 var hit = false
 var dead = false
 var onScreen = false
@@ -100,6 +100,8 @@ func _on_area_entered(area) -> void:
 	if health <= 0:
 		print("skeletor slain lol")
 		dead = true
+		var bullet = bullet_scene.instantiate()
+		remove_child(bullet)
 		var path_follow = get_parent()  # Get parent PathFollow2D
 		if path_follow is PathFollow2D:
 			path_follow.moving = false 

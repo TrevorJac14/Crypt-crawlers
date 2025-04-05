@@ -1,7 +1,7 @@
 extends Area2D
 
 var hit = false
-var health = 10
+var health = 5
 
 func _ready():
 	pass
@@ -18,6 +18,7 @@ func _on_area_entered(area) -> void:
 		health -= 5
 
 func death():
+	$hurtzone/CollisionShape2D.disabled = true
 	queue_free()
 
 
