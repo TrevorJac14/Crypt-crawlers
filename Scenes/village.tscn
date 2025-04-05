@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7s0tjw8uyfnc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7s0tjw8uyfnc"]
 
 [ext_resource type="Texture2D" uid="uid://t552cyb741ih" path="res://Tiles.png" id="3_5ik6x"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="4_c8iss"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfjtttne53jlm" path="res://Scenes/room_transition.tscn" id="11_wtryo"]
 [ext_resource type="PackedScene" uid="uid://cpdidwup57pmj" path="res://Scenes/transition_controller.tscn" id="12_f5qfd"]
 [ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="12_n74a7"]
+[ext_resource type="PackedScene" uid="uid://jbmdgf01jegj" path="res://Scenes/path_follow_skeleton_2.tscn" id="13_srpgx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lfyq"]
 texture = ExtResource("3_5ik6x")
@@ -508,7 +509,7 @@ position = Vector2(282, 2)
 position = Vector2(390, 1)
 
 [node name="Skeleton" parent="." instance=ExtResource("10_gt8in")]
-position = Vector2(733, 1)
+position = Vector2(947, -4)
 
 [node name="RoomTransition" parent="." instance=ExtResource("11_wtryo")]
 position = Vector2(977, -5)
@@ -520,5 +521,11 @@ position = Vector2(40, -41)
 [node name="PauseMenu" parent="." instance=ExtResource("11_5kpte")]
 
 [node name="GameOver" parent="." instance=ExtResource("12_n74a7")]
+
+[node name="Skeleton2" parent="." instance=ExtResource("10_gt8in")]
+position = Vector2(523, -116)
+
+[node name="marching skeleton" parent="." instance=ExtResource("13_srpgx")]
+position = Vector2(674, 1)
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0mljg58ucuav"]
+[gd_scene load_steps=22 format=3 uid="uid://c0mljg58ucuav"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_bbj3r"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_4w66r"]
@@ -11,7 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://cqmxn8sjvuv5e" path="res://Scenes/skeleton_2.tscn" id="9_ennnu"]
 [ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="11_g14hj"]
 [ext_resource type="Script" path="res://Scripts/game_over.gd" id="11_kmfky"]
+[ext_resource type="Script" path="res://Scripts/path_follow_skeleton_2.gd" id="12_66dca"]
 [ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="12_n5xy2"]
+[ext_resource type="Script" path="res://Scripts/path_follow_node_skeleton_2.gd" id="13_qrcua"]
+[ext_resource type="PackedScene" uid="uid://jbmdgf01jegj" path="res://Scenes/path_follow_skeleton_2.tscn" id="15_qjoc0"]
+[ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="16_fm8ir"]
 
 [sub_resource type="Animation" id="Animation_1u0f7"]
 length = 0.001
@@ -48,6 +52,18 @@ _data = {
 "RESET": SubResource("Animation_1u0f7"),
 "fade_in": SubResource("Animation_pq8nd")
 }
+
+[sub_resource type="Curve2D" id="Curve2D_64mob"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -41, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, -41, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_daj6g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -41, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, -41, 0)
+}
+point_count = 3
 
 [node name="Crypt1" type="Node2D"]
 
@@ -132,9 +148,6 @@ position = Vector2(268, 163)
 [node name="Skeleton" parent="." instance=ExtResource("8_n8ytq")]
 position = Vector2(494, 42)
 
-[node name="skeleton2" parent="." instance=ExtResource("9_ennnu")]
-position = Vector2(390, 96)
-
 [node name="PauseMenu" parent="." instance=ExtResource("11_g14hj")]
 
 [node name="GameOver" type="CanvasLayer" parent="."]
@@ -213,6 +226,72 @@ text = "GIVE UP"
 libraries = {
 "": SubResource("AnimationLibrary_v02m1")
 }
+
+[node name="marching skeleton" type="Node2D" parent="."]
+position = Vector2(354, 97)
+script = ExtResource("12_66dca")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="marching skeleton"]
+curve = SubResource("Curve2D_64mob")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="marching skeleton/Path2D"]
+position = Vector2(-41, 0)
+rotates = false
+script = ExtResource("13_qrcua")
+
+[node name="skeleton2" parent="marching skeleton/Path2D/PathFollow2D" instance=ExtResource("9_ennnu")]
+
+[node name="marching skeleton2" parent="." instance=ExtResource("15_qjoc0")]
+position = Vector2(509, 97)
+
+[node name="marching skeleton3" type="Node2D" parent="."]
+position = Vector2(1201, 210)
+script = ExtResource("12_66dca")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="marching skeleton3"]
+curve = SubResource("Curve2D_daj6g")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="marching skeleton3/Path2D"]
+position = Vector2(-41, 0)
+rotates = false
+script = ExtResource("13_qrcua")
+
+[node name="skeleton2" parent="marching skeleton3/Path2D/PathFollow2D" instance=ExtResource("9_ennnu")]
+
+[node name="Pslime" parent="marching skeleton3" instance=ExtResource("16_fm8ir")]
+position = Vector2(441, -12)
+
+[node name="Pslime2" parent="marching skeleton3" instance=ExtResource("16_fm8ir")]
+position = Vector2(506, -45)
+
+[node name="Pslime3" parent="marching skeleton3" instance=ExtResource("16_fm8ir")]
+position = Vector2(486, -140)
+
+[node name="Pslime4" parent="marching skeleton3" instance=ExtResource("16_fm8ir")]
+position = Vector2(-55, -205)
+
+[node name="Pslime" parent="." instance=ExtResource("16_fm8ir")]
+position = Vector2(1164, 5)
+
+[node name="Skeleton2" parent="." instance=ExtResource("8_n8ytq")]
+position = Vector2(1432, 12)
+
+[node name="Slime3" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(40, 100)
+
+[node name="Slime4" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1594, 356)
+
+[node name="Slime5" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1684, 356)
+
+[node name="Slime6" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1748, 356)
+
+[node name="Skeleton3" parent="." instance=ExtResource("8_n8ytq")]
+position = Vector2(1820, 138)
 
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
 [connection signal="pressed" from="GameOver/ColorRect/GameOverPanel/Try Again" to="GameOver" method="_on_try_again_pressed"]
