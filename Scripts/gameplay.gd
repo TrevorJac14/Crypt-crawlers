@@ -32,3 +32,5 @@ func load_new_level() -> void:
 
 func _on_timer_timeout() -> void:
 	load_new_level()
+	var game_over_ui = preload("res://Scenes/game_over.tscn").instantiate()
+	get_tree().root.add_child(game_over_ui)

@@ -16,6 +16,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
 #func show_game_over():
 #	var tween = create_tween()
 #	tween.tween_property(self, "modulate:a", 1, fade_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -23,13 +24,16 @@ func _process(delta):
 func show_game_over():
 	self.show()  # Make it visible
 	$AnimationPlayer.play("fade_in")
+	print("game over screen displayed")
 #	$AnimationPlayer.play("fade_in")  # Play fade-in animation
 
 
 func _on_give_up_pressed():
 	get_tree().quit()  # Quits the game
+	self.hide()
 
 
 func _on_try_again_pressed():
 	Engine.time_scale = 1
 	get_tree().reload_current_scene()  # Reloads the current game scene
+	self.hide()

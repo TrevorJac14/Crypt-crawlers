@@ -72,6 +72,7 @@ func shoot():
 			
 
 func is_player_infront(player: Node2D) -> bool:
+	Player = get_tree().get_first_node_in_group("Player")
 	var player_x = player.global_position.x
 	var enemy_x = global_position.x
 	var facing_right = !$AnimatedSprite2D.flip_h  # Not flipped means facing right

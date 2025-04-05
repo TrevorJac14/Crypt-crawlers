@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbk34h2sfp5s2"]
+[gd_scene load_steps=21 format=3 uid="uid://cbk34h2sfp5s2"]
 
 [ext_resource type="TileSet" uid="uid://c4v6bwvia0e5j" path="res://Scenes/maintiles.tres" id="1_j4hj1"]
 [ext_resource type="PackedScene" uid="uid://bwi3gr4idletr" path="res://Scenes/player.tscn" id="2_7n0ms"]
@@ -9,9 +9,60 @@
 [ext_resource type="PackedScene" uid="uid://c1tduwp567wof" path="res://Scenes/pslime.tscn" id="7_v1v5o"]
 [ext_resource type="PackedScene" uid="uid://b1l1bkv011bcq" path="res://Scenes/slime.tscn" id="8_kafwl"]
 [ext_resource type="PackedScene" uid="uid://8cqnp6q8o52m" path="res://Scenes/mana_potion.tscn" id="9_v0117"]
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="10_h6tj3"]
 [ext_resource type="PackedScene" uid="uid://d186ua0jt3pge" path="res://Scenes/health_potion.tscn" id="10_ln6rl"]
-[ext_resource type="PackedScene" uid="uid://jvhwvfw8pscq" path="res://Scenes/game_over.tscn" id="11_bgadx"]
+[ext_resource type="FontFile" uid="uid://csqm4o4iq65rn" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="11_d4s75"]
+[ext_resource type="Script" path="res://Scripts/path_follow_skeleton_2.gd" id="12_0vehc"]
 [ext_resource type="PackedScene" uid="uid://cupyd8ip2tlls" path="res://Scenes/pause_menu.tscn" id="12_ijuej"]
+[ext_resource type="Script" path="res://Scripts/path_follow_node_skeleton_2.gd" id="13_2fhu8"]
+
+[sub_resource type="Animation" id="Animation_1u0f7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pq8nd"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v02m1"]
+_data = {
+"RESET": SubResource("Animation_1u0f7"),
+"fade_in": SubResource("Animation_pq8nd")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_5efyr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -41, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, -41, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_1agds"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -41, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, -41, 0)
+}
+point_count = 3
 
 [node name="Graveyard" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-80.0, 1624.0]
@@ -50,14 +101,8 @@ stream = ExtResource("5_nj5t1")
 autoplay = true
 bus = &"Music"
 
-[node name="skeleton2" parent="." instance=ExtResource("6_dolvp")]
-position = Vector2(127, -17)
-
 [node name="Pslime" parent="." instance=ExtResource("7_v1v5o")]
 position = Vector2(219, -12)
-
-[node name="skeleton3" parent="." instance=ExtResource("6_dolvp")]
-position = Vector2(698, -49)
 
 [node name="Slime" parent="." instance=ExtResource("8_kafwl")]
 position = Vector2(898, -43)
@@ -68,8 +113,115 @@ position = Vector2(420, -34)
 [node name="health potion" parent="." instance=ExtResource("10_ln6rl")]
 position = Vector2(643, -54)
 
-[node name="GameOver" parent="." instance=ExtResource("11_bgadx")]
+[node name="GameOver" type="CanvasLayer" parent="."]
+script = ExtResource("10_h6tj3")
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 39.0
+offset_bottom = 39.0
+color = Color(0, 1, 1, 1)
+
+[node name="GameOverPanel" type="Panel" parent="GameOver/ColorRect"]
+self_modulate = Color(1, 1, 1, 0.521569)
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 650.0
+
+[node name="Control" type="Control" parent="GameOver/ColorRect/GameOverPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 41.0
+
+[node name="Label" type="Label" parent="GameOver/ColorRect/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 75.0
+offset_right = 1.0
+offset_bottom = 224.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("11_d4s75")
+theme_override_font_sizes/font_size = 80
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Try Again" type="Button" parent="GameOver/ColorRect/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -31.0
+offset_right = 221.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("11_d4s75")
+theme_override_font_sizes/font_size = 40
+text = "TRY AGAIN"
+
+[node name="Give Up" type="Button" parent="GameOver/ColorRect/GameOverPanel"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 461.0
+offset_right = 1152.0
+offset_bottom = 524.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("11_d4s75")
+theme_override_font_sizes/font_size = 40
+text = "GIVE UP"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_v02m1")
+}
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_ijuej")]
 
+[node name="marching skeleton" type="Node2D" parent="."]
+position = Vector2(280, -15)
+script = ExtResource("12_0vehc")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="marching skeleton"]
+curve = SubResource("Curve2D_5efyr")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="marching skeleton/Path2D"]
+position = Vector2(-41, 0)
+rotates = false
+script = ExtResource("13_2fhu8")
+
+[node name="skeleton2" parent="marching skeleton/Path2D/PathFollow2D" instance=ExtResource("6_dolvp")]
+
+[node name="marching skeleton2" type="Node2D" parent="."]
+position = Vector2(450, -47)
+script = ExtResource("12_0vehc")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="marching skeleton2"]
+curve = SubResource("Curve2D_1agds")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="marching skeleton2/Path2D"]
+position = Vector2(-41, 0)
+rotates = false
+script = ExtResource("13_2fhu8")
+
+[node name="skeleton2" parent="marching skeleton2/Path2D/PathFollow2D" instance=ExtResource("6_dolvp")]
+
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
+[connection signal="pressed" from="GameOver/ColorRect/GameOverPanel/Try Again" to="GameOver" method="_on_try_again_pressed"]
+[connection signal="pressed" from="GameOver/ColorRect/GameOverPanel/Give Up" to="GameOver" method="_on_give_up_pressed"]

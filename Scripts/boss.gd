@@ -85,13 +85,13 @@ func _on_interval_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
-		is_chase = false
+	if !dead:
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+			is_chase = false
 
 
 func death():
-	
 	dead = true
 	$AudioStreamPlayer2D.play()
 	
@@ -101,7 +101,7 @@ func _on_audio_stream_player_2d_finished():
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("sword"):
-		health -= 1
+		health -= 10
 		print("BOSS HIT")
 		$HItAudioStreamPlayer2D.play()
 		if health <= 0:
