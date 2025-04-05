@@ -293,6 +293,21 @@ position = Vector2(1748, 356)
 [node name="Skeleton3" parent="." instance=ExtResource("8_n8ytq")]
 position = Vector2(1820, 138)
 
+[node name="Slime7" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1617, 356)
+
+[node name="Slime8" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1646, 356)
+
+[node name="Slime9" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1711, 356)
+
+[node name="Slime10" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1778, 356)
+
+[node name="Slime11" parent="." instance=ExtResource("7_k6u26")]
+position = Vector2(1806, 356)
+
 [connection signal="change_level" from="RoomTransition" to="Transition_Controller" method="_on_room_transition_change_level"]
 [connection signal="pressed" from="GameOver/ColorRect/GameOverPanel/Try Again" to="GameOver" method="_on_try_again_pressed"]
 [connection signal="pressed" from="GameOver/ColorRect/GameOverPanel/Give Up" to="GameOver" method="_on_give_up_pressed"]

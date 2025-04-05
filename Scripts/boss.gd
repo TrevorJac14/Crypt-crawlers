@@ -4,7 +4,7 @@ const speed = 25
 var deceleration = 45.0  # Adjust as needed
 var dir: Vector2
 var is_chase: bool
-var damage = 50
+var damage = 34
 var health = 10
 var dead = false
 

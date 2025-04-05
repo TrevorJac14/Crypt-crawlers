@@ -4,7 +4,7 @@ extends Area2D
 @export var bullet_speed = 200
 var screen_size
 var direction = Vector2.ZERO
-var damage = 10
+var damage = 12
 
 
 # Called when the node enters the scene tree for the first time.

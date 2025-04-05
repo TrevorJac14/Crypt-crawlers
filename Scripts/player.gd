@@ -8,8 +8,8 @@ var SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const GRAVITY = 2000.0
-var health = 50
-var max_health = 50
+var health = 100
+var max_health = 100
 var mana = 100
 var max_mana = 100
 var can_take_damage = true
@@ -125,7 +125,7 @@ func apply_knockback(amount):
 	velocity.y = JUMP_VELOCITY
 	can_take_damage = false
 	$AnimatedSprite2D.modulate = Color(1,0,0,1)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	$AnimatedSprite2D.modulate = Color(1, 1, 1, 1)
 	is_knocked_back = false
 	if !is_dead:
